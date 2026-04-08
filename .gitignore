@@ -2,6 +2,7 @@
 .idea
 .vscode
 .fleet
+.qodo
 node_modules
 dist
 temp
