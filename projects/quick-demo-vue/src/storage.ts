@@ -3,6 +3,7 @@ import { ref } from "vue";
 
 const appid = ref(getAppid());
 const channel = ref(getChannel());
+const token = ref(getToken());
 const videoCodec = ref(getVideoCodec());
 
 const agoraInfo: {
@@ -25,6 +26,14 @@ function saveChannel() {
   localStorage.setItem("channel", channel.value);
 }
 
+function getToken() {
+  return localStorage.getItem("token") || "";
+}
+
+function saveToken() {
+  localStorage.setItem("token", token.value);
+}
+
 function getVideoCodec(): SDK_CODEC {
   return (localStorage.getItem("videoCodec") as SDK_CODEC) || "vp8";
 }
@@ -36,11 +45,14 @@ function saveVideoCodec() {
 export {
   appid,
   channel,
+  token,
   videoCodec,
   getAppid,
   saveAppid,
   getChannel,
   saveChannel,
+  getToken,
+  saveToken,
   getVideoCodec,
   saveVideoCodec,
 };

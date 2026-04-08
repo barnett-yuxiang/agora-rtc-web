@@ -19,6 +19,16 @@
       />
     </div>
 
+    <div class="content-token">
+      <label for="token">Token: </label>
+      <input
+        id="token"
+        type="text"
+        v-model="token"
+        placeholder="Please input token"
+      />
+    </div>
+
     <div class="content-video-codec">
       <label for="video-codec">video codec: </label>
       <input
@@ -40,10 +50,12 @@ import {
   agoraInfo,
   appid,
   channel,
+  token,
   videoCodec,
   saveVideoCodec,
   saveAppid,
   saveChannel,
+  saveToken,
 } from "./storage";
 import { createClient } from "agora-rtc-sdk-ng/esm";
 
@@ -56,12 +68,13 @@ async function join() {
 
   const client = createClient({ mode: "rtc", codec: videoCodec.value });
 
-  await client.join(appid.value, channel.value, null, null);
+  await client.join(appid.value, channel.value, token.value || null, null);
 
   agoraInfo.client = client;
 
   saveAppid();
   saveChannel();
+  saveToken();
   saveVideoCodec();
 
   $emit("logged");
